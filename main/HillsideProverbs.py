@@ -1,5 +1,6 @@
 import random as rand
 import smtplib, ssl
+from datetime import date
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import formataddr
@@ -61,8 +62,17 @@ def sendEmail(daily_saying):
             send_email, recipients, message.as_string()
         )
 
+def writeToFile(saying):
+    path = '..\\res\\latest_proverb.txt'
+    today = date.today()
+    with open(path, 'w') as f:
+        f.write('%s\t%s' % (
+            today, saying
+        ))
+
 def main():
     daily_saying = chooseSaying()
+    writeToFile(daily_saying)
     sendEmail(daily_saying)
 
 if __name__ == '__main__':
