@@ -72,6 +72,8 @@ def sendEmail(daily_saying):
     service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
     send_email = 'ders.mailbot@gmail.com'
     recipients = []
+    # test use:
+    # '..\\res\\mail_info\\recipients_test.txt'
     list_path = '..\\res\\mail_info\\recipients.txt'
     with open(list_path,'r') as f:
         lines = f.readlines()
