@@ -30,40 +30,6 @@ def formatEmail(daily_saying):
         daily_saying = daily_saying
     )
 
-# def sendEmail(daily_saying):
-#     port = 465
-#     acct_path = '..\\res\\mail_info\\account_info.txt'
-#     with open(acct_path, 'r') as f:
-#         lines = f.readlines()
-#         send_email = lines[0]
-#         password = lines[1]
-#     recipients = []
-#     recipients_path = '..\\res\\mail_info\\recipients.txt'
-#     with open(recipients_path, 'r') as f:
-#         lines = f.readlines()
-#         for l in lines:
-#             recipients.append(l)
-#     message = MIMEMultipart('alternative')
-#     message['Subject'] = 'Weekly Proverb'
-#     message['From'] = formataddr(('Hillside Proverbs', send_email))
-#     message['To'] = ', '.join(recipients)
-#     message['Bcc'] = ''
-
-#     body = MIMEText(daily_saying, 'plain')
-#     html_string = formatEmail(daily_saying)
-
-#     formatting = MIMEText(html_string, 'html')
-
-#     message.attach(body)
-#     message.attach(formatting)
-
-#     context = ssl.create_default_context()
-#     with smtplib.SMTP_SSL('smtp.gmail.com', port, context=context) as server:
-#         server.login(send_email, password)
-#         server.sendmail(
-#             send_email, recipients, message.as_string()
-#         )
-
 def sendEmail(daily_saying):
     CLIENT_SECRET_FILE = '..\\res\\gmail\\client.json'
     API_NAME = 'gmail'
