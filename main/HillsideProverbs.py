@@ -1,5 +1,4 @@
 import random as rand
-import smtplib, ssl
 from datetime import date
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
