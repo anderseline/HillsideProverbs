@@ -30,7 +30,7 @@ def formatEmail(daily_saying):
     )
 
 def sendEmail(daily_saying):
-    CLIENT_SECRET_FILE = '..\\res\\gmail\\client.json'
+    CLIENT_SECRET_FILE = '..\\res\\gmail\\client_published.json'
     API_NAME = 'gmail'
     API_VERSION = 'v1'
     SCOPES = ['https://mail.google.com/']
