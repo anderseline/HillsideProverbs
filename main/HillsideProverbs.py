@@ -1,5 +1,4 @@
 import random as rand
-from datetime import date
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import formataddr
@@ -29,18 +28,15 @@ def formatEmail(daily_saying):
         daily_saying = daily_saying
     )
 
-def sendEmail(daily_saying):
-    CLIENT_SECRET_FILE = '..\\res\\gmail\\client_published.json'
+def sendEmail(daily_saying, recipeints_path):
+    CLIENT_SECRET_FILE = '..\\res\\gmail\\client_secret.json'
     API_NAME = 'gmail'
     API_VERSION = 'v1'
     SCOPES = ['https://mail.google.com/']
     service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
     send_email = 'ders.mailbot@gmail.com'
     recipients = []
-    # test use:
-    # '..\\res\\mail_info\\recipients_test.txt'
-    list_path = '..\\res\\mail_info\\recipients.txt'
-    with open(list_path,'r') as f:
+    with open(recipeints_path,'r') as f:
         lines = f.readlines()
     for l in lines:
         recipients.append(l.strip())
@@ -60,18 +56,12 @@ def sendEmail(daily_saying):
     raw_string = base64.urlsafe_b64encode(message.as_bytes()).decode()
     message = service.users().messages().send(userId='me', body={'raw':raw_string}).execute()
 
-def writeToFile(saying):
-    path = '..\\res\\latest_proverb.txt'
-    today = date.today()
-    with open(path, 'w') as f:
-        f.write('%s\t%s' % (
-            today, saying
-        ))
-
 def main():
+
     daily_saying = chooseSaying()
-    writeToFile(daily_saying)
-    sendEmail(daily_saying)
+    recipients_path = '..\\res\\mail_info\\recipients.txt'
+    print(daily_saying)
+    sendEmail(daily_saying, recipeints_path=recipients_path)
 
 if __name__ == '__main__':
     main()
